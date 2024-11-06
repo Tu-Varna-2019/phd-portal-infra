@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tuvarna-service
+  namespace: tuvarna
+  labels:
+    degree: phd
+    version: v1
+
+spec:
+  type: LoadBalancer
+
+  selector:
+    degree: phd
+    type: database
+    version: v1
+
+  ports:
+    - name: postgres
+      port: 5432
+      protocol: TCP
+      targetPort: 5432
+      nodePort: 30000
+
+  
+#status:
+#  loadBalancer:
+#    ingress:
+#      - ip: 192.0.2.127
+
