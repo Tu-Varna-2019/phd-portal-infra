@@ -1,13 +1,13 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tuvarna-db
   namespace: tuvarna
-  labels: 
+  labels:
     degree: phd
     type: database
     version: v1
-    
 spec:
   replicas: 1
   minReadySeconds: 10
@@ -38,12 +38,12 @@ spec:
         - name: postgre-vol
           persistentVolumeClaim:
             claimName: postgre-per-vol
-     
+
       containers:
         - name: postgre
           image: postgres:13.16-bookworm
           imagePullPolicy: IfNotPresent
-          
+
           ports:
             - containerPort: 5432
 
@@ -73,4 +73,3 @@ spec:
                 secretKeyRef:
                   name: tuvarna-secrets
                   key: POSTGRES_DB
-

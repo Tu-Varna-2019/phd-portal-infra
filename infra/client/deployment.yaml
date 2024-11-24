@@ -1,0 +1,69 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tuvarna-client
+  namespace: tuvarna
+  labels:
+    degree: phd
+    type: client
+    version: v1
+
+spec:
+  replicas: 1
+  minReadySeconds: 30
+  selector:
+    matchLabels:
+      degree: phd
+      type: client
+      version: v1
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/default-container: tuvarna-client
+      labels:
+        degree: phd
+        type: client
+        version: v1
+
+    spec:
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 120
+      containers:
+        - name: reactjs
+          image: ghcr.io/tu-varna-2019/phd-portal-client:release-0.0.1
+          imagePullPolicy: IfNotPresent
+
+          ports:
+            - name: liveness-port
+              containerPort: 3000
+
+          resources:
+            requests:
+              cpu: 1000m
+              memory: 1Gi
+            limits:
+              cpu: 2000m
+              memory: 4Gi
+
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: liveness-port
+          #   failureThreshold: 5
+          #   periodSeconds: 10
+          #   initialDelaySeconds: 60
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: liveness-port
+          #   failureThreshold: 5
+          #   periodSeconds: 10
+          #   initialDelaySeconds: 60
