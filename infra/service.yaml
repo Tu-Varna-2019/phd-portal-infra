@@ -34,3 +34,15 @@ spec:
       protocol: TCP
       targetPort: 8080
       nodePort: 30002
+
+    - name: elasticache2
+      port: 9200
+      protocol: TCP
+      targetPort: 9200
+      nodePort: 30003
+
+    - name: elasticache3
+      port: 9300
+      protocol: TCP
+      targetPort: 9300
+      nodePort: 30004

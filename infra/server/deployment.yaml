@@ -37,7 +37,7 @@ spec:
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       containers:
-        - name: reactjs
+        - name: quarkus
           image: ghcr.io/tu-varna-2019/phd-portal-server:release-0.0.1
           imagePullPolicy: IfNotPresent
 
@@ -63,6 +63,44 @@ spec:
           ports:
             - name: liveness-port
               containerPort: 8080
+
+          resources:
+            requests:
+              cpu: 1000m
+              memory: 1Gi
+            limits:
+              cpu: 2000m
+              memory: 4Gi
+
+        - name: elastisearch
+          image: elasticsearch:7.17.26
+          imagePullPolicy: IfNotPresent
+
+          env:
+            - name: ELASTIC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: tuvarna-secrets
+                  key: ELASTIC_PASSWORD
+
+            - name: discovery.type
+              valueFrom:
+                configMapKeyRef:
+                  name: tuvarna-configs
+                  key: DISCOVERY_TYPE
+
+            - name: xpack.security.enabled
+              valueFrom:
+                configMapKeyRef:
+                  name: tuvarna-configs
+                  key: XPACK_SECURITY_ENABLED
+
+          ports:
+            - name: liveness-port2
+              containerPort: 9200
+
+            - name: liveness-port3
+              containerPort: 9300
 
           resources:
             requests:

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tuvarna-configs
+  namespace: tuvarna
+  labels:
+    degree: phd
+    version: v1
+data:
+  DISCOVERY_TYPE: "single-node"
+  XPACK_SECURITY_ENABLED: true
