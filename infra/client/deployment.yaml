@@ -6,7 +6,6 @@ metadata:
   namespace: tuvarna
   labels:
     degree: phd
-    type: client
     version: v1
 
 spec:
@@ -15,7 +14,6 @@ spec:
   selector:
     matchLabels:
       degree: phd
-      type: client
       version: v1
 
   strategy:
@@ -30,7 +28,6 @@ spec:
         kubectl.kubernetes.io/default-container: tuvarna-client
       labels:
         degree: phd
-        type: client
         version: v1
 
     spec:
@@ -38,7 +35,7 @@ spec:
       terminationGracePeriodSeconds: 120
       containers:
         - name: reactjs
-          image: ghcr.io/tu-varna-2019/phd-portal-client:release-0.0.1
+          image: ghcr.io/tu-varna-2019/phd-portal-client:release-1.0.0
           imagePullPolicy: IfNotPresent
 
           ports:

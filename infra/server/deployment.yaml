@@ -6,7 +6,6 @@ metadata:
   namespace: tuvarna
   labels:
     degree: phd
-    type: server
     version: v1
 
 spec:
@@ -15,7 +14,6 @@ spec:
   selector:
     matchLabels:
       degree: phd
-      type: server
       version: v1
 
   strategy:
@@ -30,7 +28,6 @@ spec:
         kubectl.kubernetes.io/default-container: tuvarna-server
       labels:
         degree: phd
-        type: server
         version: v1
 
     spec:
@@ -38,27 +35,75 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
         - name: quarkus
-          image: ghcr.io/tu-varna-2019/phd-portal-server:release-0.0.1
-          imagePullPolicy: IfNotPresent
+          image: ghcr.io/tu-varna-2019/phd-portal-server:release-1.0.0
+          imagePullPolicy: Always
 
           env:
-            - name: quarkus.datasource.username
+            - name: QUARKUS_DATASOURCE_USERNAME
               valueFrom:
                 secretKeyRef:
                   name: tuvarna-secrets
                   key: POSTGRES_USER
 
-            - name: quarkus.datasource.password
+            - name: QUARKUS_DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: tuvarna-secrets
                   key: POSTGRES_PASSWORD
 
-            - name: quarkus.datasource.jdbc.url
+            - name: QUARKUS_DATASOURCE_JDBC_URL
               valueFrom:
                 secretKeyRef:
                   name: tuvarna-secrets
                   key: POSTGRES_JDBC
+
+            - name: QUARKUS_DATASOURCE_REACTIVE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: tuvarna-secrets
+                  key: POSTGRES_JDBC
+
+            - name: QUARKUS_MAILER_FROM
+              valueFrom:
+                secretKeyRef:
+                  name: tuvarna-secrets
+                  key: MAILER_FROM
+
+            - name: QUARKUS_MAILER_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: tuvarna-secrets
+                  key: MAILER_HOST
+
+            - name: QUARKUS_MAILER_PORT
+              value: "587"
+
+            - name: QUARKUS_MAILER_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: tuvarna-secrets
+                  key: MAILER_USERNAME
+
+            - name: QUARKUS_MAILER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: tuvarna-secrets
+                  key: MAILER_PASSWORD
+
+            - name: QUARKUS_S3_AWS_CREDENTIALS_TYPE
+              value: "static"
+
+            - name: QUARKUS_S3_AWS_CREDENTIALS_STATIC_PROVIDER_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: tuvarna-secrets
+                  key: S3_AWS_CREDENTIALS_STATIC_PROVIDER_ACCESS_KEY_ID
+
+            - name: QUARKUS_S3_AWS_CREDENTIALS_STATIC_PROVIDER_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: tuvarna-secrets
+                  key: S3_AWS_CREDENTIALS_STATIC_PROVIDER_SECRET_ACCESS_KEY
 
           ports:
             - name: liveness-port

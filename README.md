@@ -1,24 +1,17 @@
 # Introduction
 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. ## Getting Started TODO: Repository contains the agreed folder structure that the project should contain. Each folder reflects an Azure resource. Please remove unnecessary folders from the repository. 1. Installation process
+## Port forward client
+```bash
+kubectl port-forward pod/  -n tuvarna 3000:3000
+```
 
- TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
+## Port forward server
+```bash
+kubectl port-forward pod/...  -n tuvarna 8080:8080
+```
 
-1. Installation process
-2. Software dependencies
-3. Latest releases
-4. API references
+## Delete cached image from pod
 
-1. Installation process
-Create virtual environment and install dependencies:
-
-## Build and Test
-
-TODO: Describe and show how to build your code and run the tests.
-
-## Contribute
-
-TODO: Explain how other users and developers can contribute to make your code better.
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files: - [ASP.NET Core](https://github.com/aspnet/Home) - [Visual Studio Code](https://github.com/Microsoft/vscode)
-
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+```bash
+docker exec -it kind-control-plane crictl rmi ghcr.io/tu-varna-2019/phd-portal-server:release-1.0.0
+```

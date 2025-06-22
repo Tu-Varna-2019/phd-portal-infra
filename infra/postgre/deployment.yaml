@@ -5,7 +5,6 @@ metadata:
   namespace: tuvarna
   labels:
     degree: phd
-    type: database
     version: v1
 spec:
   replicas: 1
@@ -13,7 +12,6 @@ spec:
   selector:
     matchLabels:
       degree: phd
-      type: database
       version: v1
 
   strategy:
@@ -26,7 +24,6 @@ spec:
     metadata:
       labels:
         degree: phd
-        type: database
         version: v1
 
     spec:

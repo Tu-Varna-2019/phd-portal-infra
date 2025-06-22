@@ -13,7 +13,6 @@ spec:
 
   selector:
     degree: phd
-    type: database
     version: v1
 
   ports:
@@ -45,4 +44,4 @@ spec:
       port: 9300
       protocol: TCP
       targetPort: 9300
-      nodePort: 30003
+      nodePort: 30004

@@ -6,11 +6,10 @@ metadata:
 
   labels:
     degree: phd
-    type: database
     version: v1
 
 spec:
-  capacity: 
+  capacity:
     storage: 2Gi
   accessModes:
     - ReadWriteOnce
@@ -27,7 +26,6 @@ metadata:
 
   labels:
     degree: phd
-    type: database
     version: v1
 
 spec:
