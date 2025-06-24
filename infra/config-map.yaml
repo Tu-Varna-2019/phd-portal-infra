@@ -10,3 +10,6 @@ metadata:
 data:
   DISCOVERY_TYPE: "single-node"
   XPACK_SECURITY_ENABLED: "true"
+  BASE_URL: "http://tuvarna-service:8080/api.tuvarna.phd.com/v1"
+  NEXT_PUBLIC_FETCH_API_DURATION: "10000"
+  HTTPS: "false"

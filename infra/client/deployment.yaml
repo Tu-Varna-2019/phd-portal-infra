@@ -38,6 +38,25 @@ spec:
           image: ghcr.io/tu-varna-2019/phd-portal-client:release-1.0.0
           imagePullPolicy: IfNotPresent
 
+          env:
+            - name: BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: tuvarna-configs
+                  key: BASE_URL
+
+            - name: NEXT_PUBLIC_FETCH_API_DURATION
+              valueFrom:
+                configMapKeyRef:
+                  name: tuvarna-configs
+                  key: NEXT_PUBLIC_FETCH_API_DURATION
+
+            - name: HTTPS
+              valueFrom:
+                configMapKeyRef:
+                  name: tuvarna-configs
+                  key: HTTPS
+
           ports:
             - name: liveness-port
               containerPort: 3000
