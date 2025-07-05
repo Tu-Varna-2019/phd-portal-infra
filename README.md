@@ -1,23 +1,77 @@
-# Introduction
+# 🎓 Designing and implementing a Doctoral Admission and Training System 🎓
 
-## Port forward client
-```bash
-kubectl port-forward pod/  -n tuvarna 3000:3000
+[![License](https://img.shields.io/github/license/Tu-Varna-2019/phd-portal-infra)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![Dependabot Updates](https://github.com/Tu-Varna-2019/phd-portal-infra/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/Tu-Varna-2019/phd-portal-server/actions/workflows/dependabot/dependabot-updates)
+[![Security scanning](https://github.com/Tu-Varna-2019/phd-portal-infra/actions/workflows/security-scan.yaml/badge.svg)](https://github.com/Tu-Varna-2019/phd-portal-server/actions/workflows/security-scan.yaml)
+[![GitHub release](https://img.shields.io/github/v/release/Tu-Varna-2019/phd-portal-infra)](#)
+[![GitHub release date](https://img.shields.io/github/release-date/Tu-Varna-2019/phd-portal-infra)](#)
+[![itHub last commit](https://img.shields.io/github/last-commit/Tu-Varna-2019/phd-portal-infra)](#)
+
+## 🚀 About
+
+The project should develop an engineering solution for digitizing an information system for doctoral students and candidates in order to be used by higher education institutions, which would integrate into the systematic process for the management and management of the so -called "digital university".
+
+## 🎉 Getting started
+
+### ✅ Prerequisites
+
+In order to containerize the apps, make sure you have installed the following dependencies
+
+| Program |                     URL                     |
+| :------ | :-----------------------------------------: |
+| Kind  | [Kind](https://kind.sigs.k8s.io/) |
+| Kubectl  | [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/) |
+| Sops  | [Sops](https://github.com/getsops/sops) |
+
+> If you are using Nix or NixOS you can install them in flake.nix via _devenv_
+
+### 🌱 Setup
+
+1. Define the secrets from the server and app and apply it as secrets
+
+```sh
+kubectl apply -f infra/.secrets.yaml
+
 ```
 
-## Port forward server
-```bash
-kubectl port-forward pod/...  -n tuvarna 8080:8080
+### ⚓ Run the cluster
+
+```sh
+	kubectl apply -f infra/.secrets.yaml
+	kubectl apply -f infra/config-map.yaml
+	kubectl apply -f infra/config-map.yaml
+	kubectl apply -f infra/namespace.yaml
+	kubectl apply -f infra/namespace.yaml
+	kubectl apply -f infra/service.yaml
+	kubectl apply -f infra/postgre/volume_claim.yaml
+	kubectl apply -f infra/postgre/deployment.yaml
+	kubectl apply -f infra/client/deployment.yaml
+	kubectl apply -f infra/server/deployment.yaml
+# Or
+make run
 ```
 
-## Delete cached image from pod
+## 🧑‍💻 Commands
 
-```bash
-docker exec -it kind-control-plane crictl rmi ghcr.io/tu-varna-2019/phd-portal-server:release-1.0.0
-```
+| Command             | Description                                    |
+| :------------------ | :--------------------------------------------- |
+| make help           | Show available commands with their description |
+| make run            | Run the containers with their configs                       |
+| make port-fwd-client            | port forward to a pod on the client app                                    |
+| make port-fwd-server            | port forward to a pod on the server app                                    |
+| make exec-pod            | Enter a pod env
+| make clear-pod            | Clear docker images to force the pod to pull images aagin
 
-## Enter container
+#### 📚 Docs
 
-```bash
-kubectl -n tuvarna exec -it tuvarna-client-5c9c9478b7-q52vr -- /bin/sh
-```
+- [ Javascript ](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [ ReactJS ](https://react.dev/)
+- [ NextJS ](https://nextjs.org/docs)
+- [ Docker ](https://docs.docker.com/)
+- [ Nix ](https://nix.dev/manual/nix/2.18/)
+- [ MaterialUI ](https://mui.com/)
+
+### 📃 License
+
+This product is licensed under [GNU General Public License](https://www.gnu.org/licenses/gpl-3.0.en.html)
+
