@@ -16,8 +16,8 @@ port-forward-server:## Port forward to a server
 
 .PHONY: clear-cache
 clear-cache: ## Clear cache
-	docker exec -it kind-control-plane crictl rmi ghcr.io/tu-varna-2019/phd-portal-server:release-1.1.0
-	docker exec -it kind-control-plane crictl rmi ghcr.io/tu-varna-2019/phd-portal-client:release-1.1.0
+	docker exec -it kind-control-plane crictl rmi ghcr.io/tu-varna-2019/phd-portal-server:release-1.1.1
+	docker exec -it kind-control-plane crictl rmi ghcr.io/tu-varna-2019/phd-portal-client:release-1.1.1
 
 .PHONY: exec-pod
 exec-pod: ## Enter the pod env

@@ -35,7 +35,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
         - name: quarkus
-          image: ghcr.io/tu-varna-2019/phd-portal-server:release-1.1.0
+          image: ghcr.io/tu-varna-2019/phd-portal-server:release-1.1.1
           imagePullPolicy: Always
 
           env:
